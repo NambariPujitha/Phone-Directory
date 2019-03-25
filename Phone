@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Phone Directory</title>
+</head>
+<script>
+
+ var Contacts = [];
+    var cart = [];
+
+        function addContact() {
+            var Name = document.getElementById("Name").value;
+            var phonenumber = document.getElementById("phonenumber").value;
+           
+
+            var newContact = {
+                Name: null,
+                phonenumber: null,
+               
+            };
+            newContact.Name = Name;
+            newContact.phonenumber = phonenumber;
+           
+
+
+            Contacts.push(newContact);
+
+
+            var html = "<table border='1|1' >";
+            html += "<td>Contact Name</td>";
+            html += "<td>PhoneNumber</td>";
+           
+            html += "<td>Action</td>";
+            for (var i = 0; i < Contacts.length; i++) {
+                html += "<tr>";
+                html += "<td>" + Contacts[i].Name + "</td>";
+                html += "<td>" + Contacts[i].phonenumber + "</td>";
+               
+                html += "<td><button type='submit' onClick='deleteContact(\"" + Contacts[i].Name + "\", this);'/>Delete Contact</button> </td>";
+                html += "</tr>";
+            }
+            html += "</table>";
+            document.getElementById("demo").innerHTML = html;
+
+            document.getElementById("resetbtn").click()
+        }
+        function deleteContact(Name, e) {
+            e.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode);
+            for (var i = 0; i < Contacts.length; i++) {
+                if (Contacts[i].Name == Name) {
+                    // DO NOT CHANGE THE 1 HERE
+                    Contacts.splice(i, 1);
+                }
+            }
+        }
+
+       
+</script>
+<body>
+<form name="order" id="order">
+    <table>
+        <tr>
+            <td>
+                <label for="Name">Name</label>
+            </td>
+            <td>
+                <input id="Name" name="Name" type="text" size="28" required/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="Phone">Phone Number:</label>
+            </td>
+            <td>
+                <input id="phonenumber" name="phone" type="text" size="28" required/>
+            </td>
+        </tr>
+       
+    </table>
+    <input type="reset" name="reset" id="resetbtn" class="resetbtn" value="Reset" />
+    <input type="button" id="btnAddContact" onclick="addContact();" value="Add New Contact" >
+</form>
+<br>
+<p id="demo"></p> <br/>
+
+</body>
+</html>
